@@ -35,13 +35,23 @@ body {
 
 .select-btn i {
     font-size: 31px;
+    transition: transform 0.3s linear;
+}
+
+.wrapper.active .select-btn i {
+    transform: rotate(-180deg);
 }
 
 .content {
+    display: none;
     padding: 20 px;
     margin-top: 15px;
     border-radius: 7px;
     background: #fff;
+}
+
+.wrapper.active .content {
+    display: block;
 }
 
 .content .search {
@@ -70,6 +80,7 @@ body {
     margin-top: 10px;
     max-height: 250px;
     overflow-y: auto;
+    padding-right: 7px;
 }
 
 .options::-webkit-scrollbar {
@@ -93,6 +104,6 @@ body {
     border-radius: 5px;
 }
 
-.options li:hover {
+.options li:hover, li.selected {
     background: #f2f2f2;
 }
