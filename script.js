@@ -61,7 +61,7 @@ searchInp.addEventListener("keyup", () => {
     let arr = [];
     let searchWord = searchInp.value.toLowerCase();
     arr = courses.filter(data => {
-        return data.toLowerCase().startsWith(searchWord);
+        return data.toLowerCase().includes(searchWord);
     }).map(data => {
         let isSelected = data == selectBtn.firstElementChild.innerText ? "selected" : "";
         return `<li onclick="updateName(this)" class="${isSelected}">${data}</li>`;
