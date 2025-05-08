@@ -1,7 +1,8 @@
 const wrapper = document.querySelector(".wrapper"),
-selectBtn = wrapper.querySelector(".select-btn"),
-searchInp = wrapper.querySelector("input"),
-options = wrapper.querySelector(".options");
+    selectBtn = wrapper.querySelector(".select-btn"),
+    searchInp = wrapper.querySelector("input"),
+    options = wrapper.querySelector(".options"),
+    deleteBtn = document.querySelector(".delete-btn"); // Select the delete button
 
 let courses = [
     "1ZV50 Fundamentals of product innovation",
@@ -40,10 +41,12 @@ let courses = [
     "2WBB0 Calculus variant 2"
 ];
 
-function addCourse(selectedCourse) {
+let selectedCourse = ""; // Store the selected course
+
+function addCourse() {
     options.innerHTML = "";
     courses.forEach(course => {
-        let isSelected = course == selectedCourse ? "selected" : "";
+        let isSelected = course === selectedCourse ? "selected" : "";
         let li = `<li onclick="updateName(this)" class="${isSelected}">${course}</li>`;
         options.insertAdjacentHTML("beforeend", li);
     });
@@ -52,9 +55,10 @@ addCourse();
 
 function updateName(selectedLi) {
     searchInp.value = "";
-    addCourse(selectedLi.innerText);
+    selectedCourse = selectedLi.innerText; // Update the selected course
+    addCourse();
     wrapper.classList.remove("active");
-    selectBtn.firstElementChild.innerText = selectedLi.innerText;
+    selectBtn.firstElementChild.innerText = selectedCourse;
 }
 
 searchInp.addEventListener("keyup", () => {
@@ -63,10 +67,17 @@ searchInp.addEventListener("keyup", () => {
     arr = courses.filter(data => {
         return data.toLowerCase().includes(searchWord);
     }).map(data => {
-        let isSelected = data == selectBtn.firstElementChild.innerText ? "selected" : "";
+        let isSelected = data === selectedCourse ? "selected" : "";
         return `<li onclick="updateName(this)" class="${isSelected}">${data}</li>`;
     }).join("");
     options.innerHTML = arr ? arr : `<p style="margin-top: 10px;">Oops! Course not found</p>`;
 });
 
 selectBtn.addEventListener("click", () => wrapper.classList.toggle("active"));
+
+// Add event listener to the delete button
+deleteBtn.addEventListener("click", () => {
+    selectedCourse = ""; // Clear the selected course
+    selectBtn.firstElementChild.innerText = "Select Course"; // Reset the button text
+    addCourse(); // Update the options list with no selected course
+});

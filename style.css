@@ -38,7 +38,7 @@ body {
     transition: transform 0.3s linear;
 }
 
-.wrapper.active .select-btn i {
+.wrapper.active .select-btn .uil-angle-down {
     transform: rotate(-180deg);
 }
 
@@ -106,4 +106,27 @@ body {
 
 .options li:hover, li.selected {
     background: #f2f2f2;
+}
+
+/* Styling the delete button below the dropdown */
+.delete-wrapper {
+    margin-top: 20px; /* Adds space between dropdown and delete button */
+    display: flex;
+    justify-content: center;
+}
+
+.delete-btn {
+    height: 65px;
+    font-size: 22px;
+    display: flex;
+    padding: 0 20px;
+    border-radius: 7px;
+    background-color: #fff;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.delete-btn i {
+    font-size: 31px;
 }
